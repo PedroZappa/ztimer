@@ -1,0 +1,2 @@
+include scripts/build.sh
+include scripts/run.sh
