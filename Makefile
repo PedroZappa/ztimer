@@ -10,6 +10,7 @@ SHELL	:= bash --rcfile ~/.bashrc
 #==============================================================================#
 
 NAME = zTimer
+APP = app.py
 VENV = .venv
 
 ### Message Vars
@@ -34,10 +35,10 @@ MKDIR_P	= mkdir -p
 
 ##@ Project Scaffolding 󰛵
 
-all: 	## Build envvironment
+all: 	## Build and run project
 	make run
 
-build:
+build:		## Build project
 	@echo "*** $(YEL)Building $(MAG)$(NAME)$(YEL) environment...$(D)"
 	./scripts/build.sh
 	@echo "* $(MAG)$(NAME) $(YEL)build$(D): $(_SUCCESS)"
@@ -46,6 +47,14 @@ run: build  # Run project
 	@echo "* $(MAG)$(NAME) $(YEL)executing$(D): $(_SUCCESS)"
 	source ./scripts/run.sh && python3 app.py
 	@echo "* $(MAG)$(NAME) $(YEL)finished$(D): $(_SUCCESS)"
+
+##@ Debug Rules 
+
+serve: build  # Serve Textual project as a web app
+	@echo "* $(YEL)Preparing to serve $(MAG)$(NAME)$(D):"
+	textual serve $(APP)
+
+
 
 ##@ Clean-up Rules 󰃢
 
