@@ -7,7 +7,7 @@ It uses the Textual library to create a text-based user interface.
 
 from textual.app import App, ComposeResult
 from textual.widgets import Digits
-
+from textual import log
 
 class zTimer(App):
   """
@@ -30,6 +30,12 @@ class zTimer(App):
         Digits: A widget to display the elapsed time.
     """
     yield Digits("")
+
+  def on_mount(self) -> None:
+    log("Mounted")
+    log(locals())
+    log(children=self.children, pi=3.141592)
+    log(self.tree)
 
   def on_ready(self) -> None:
     """
@@ -62,5 +68,5 @@ class zTimer(App):
 
 if __name__ == "__main__":
   # Create an instance of the zTimer and run it
-  app = zTimer()
+  app = zTimer(ansi_color=True)
   app.run()
