@@ -65,6 +65,15 @@ class zTimer(App):
     self.query_one(Digits).update(f"{hrs:02}:{mins:02}:{secs:02}")
     self.seconds += 1
 
+  def on_unmount(self) -> None:
+    """
+    Handle the application exit and print the final elapsed time.
+    """
+    hrs = self.seconds // 3600
+    mins = (self.seconds % 3600) // 60
+    secs = self.seconds % 60
+    print(f"Total elapsed time: {hrs:02}:{mins:02}:{secs:02}")
+
 
 if __name__ == "__main__":
   # Create an instance of the zTimer and run it
